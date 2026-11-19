@@ -126,3 +126,25 @@ Kết quả kiểm tra:
 
 \*\*Giải thích:\*\* Negotiate giúp Client và Server trao đổi thông tin trước khi thiết lập kết nối SignalR.
 
+\## Bước 6: Kiểm tra Broadcast và Group
+
+
+
+Chạy hai Client An và Binh để kiểm tra gửi tin nhắn.
+
+
+
+Kết quả kiểm tra:
+
+
+
+!\[Broadcast và Group](anh/buoc6-broadcast-group.png)
+
+
+
+\*\*Kết quả:\*\* Cả hai Client kết nối thành công, nhận được tin nhắn Broadcast và tin nhắn trong nhóm.
+
+
+
+\*\*Giải thích:\*\* Broadcast gửi tin nhắn đến tất cả Client, còn Group chỉ gửi tin nhắn đến các Client thuộc cùng một nhóm.
+
