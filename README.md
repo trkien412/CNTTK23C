@@ -148,3 +148,25 @@ Kết quả kiểm tra:
 
 \*\*Giải thích:\*\* Broadcast gửi tin nhắn đến tất cả Client, còn Group chỉ gửi tin nhắn đến các Client thuộc cùng một nhóm.
 
+\## Bước 7: Kiểm tra tự động kết nối lại
+
+
+
+Dừng Server và khởi động lại để kiểm tra khả năng tự động kết nối lại của Client.
+
+
+
+Kết quả kiểm tra:
+
+
+
+!\[Reconnect](anh/buoc7-reconnect.png)
+
+
+
+\*\*Kết quả:\*\* Client tự động kết nối lại thành công sau khi Server hoạt động trở lại.
+
+
+
+\*\*Giải thích:\*\* WithAutomaticReconnect() hỗ trợ Client tự động thử kết nối lại khi mất kết nối với Server.
+
