@@ -7,6 +7,24 @@ var connection = new HubConnectionBuilder()
     .WithAutomaticReconnect()
     .Build();
 
+connection.Reconnecting += error =>
+{
+    Console.WriteLine("Dang ket noi lai...");
+    return Task.CompletedTask;
+};
+
+connection.Reconnected += connectionId =>
+{
+    Console.WriteLine("Da ket noi lai");
+    return Task.CompletedTask;
+};
+
+connection.Closed += error =>
+{
+    Console.WriteLine("Da ngat ket noi!");
+    return Task.CompletedTask;
+};
+
 connection.On<string>("EchoResponse", message =>
 {
     Console.WriteLine($"[Echo] Echo: {message}");

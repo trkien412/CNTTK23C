@@ -72,3 +72,25 @@ Kết quả chạy thử:
 
 Client kết nối và nhận phản hồi thành công.
 
+\## Bước 4: Kiểm tra tự động kết nối lại
+
+
+
+Đã cấu hình WithAutomaticReconnect() và bổ sung các sự kiện Reconnecting, Reconnected, Closed để theo dõi trạng thái kết nối.
+
+
+
+Tiến hành tắt Server rồi khởi động lại. Client tự động phát hiện mất kết nối và kết nối lại thành công.
+
+
+
+Kết quả kiểm thử:
+
+
+
+!\[Automatic Reconnect](anh/buoc4-noilai.png)
+
+
+
+Client hiển thị thông báo "Dang ket noi lai..." và "Da ket noi lai".
+
