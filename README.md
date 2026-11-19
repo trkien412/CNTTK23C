@@ -210,3 +210,41 @@ Sửa đường dẫn Hub trong Client từ `/hubs/ping` thành `/hub/ping` rồ
 
 \*\*Giải thích:\*\* Đường dẫn kết nối của Client phải trùng với đường dẫn được cấu hình trong `MapHub()` ở Server.
 
+\### Lỗi 3 – Sai tên phương thức và sự kiện
+
+
+
+\*\*Trường hợp 1: Sai tên phương thức\*\*
+
+
+
+Client gọi `Ech0` thay vì `Echo`.
+
+
+
+!\[Lỗi 3a](anh/buoc9-loi3.png)
+
+
+
+\*\*Kết quả:\*\* Server trả về lỗi HubException: Method does not exist.
+
+
+
+\*\*Trường hợp 2: Sai tên sự kiện nhận\*\*
+
+
+
+Client lắng nghe `EchoRespone` thay vì `EchoResponse`.
+
+
+
+!\[Lỗi 3b](anh/buoc9-loi3b.png)
+
+
+
+\*\*Kết quả:\*\* Client vẫn kết nối bình thường nhưng không nhận được phản hồi Echo.
+
+
+
+\*\*Giải thích:\*\* Tên phương thức và tên sự kiện giữa Client và Server phải khớp nhau.
+
