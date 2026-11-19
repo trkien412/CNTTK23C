@@ -192,3 +192,21 @@ Kết quả kiểm tra:
 
 \*\*Giải thích:\*\* StartAsync() không thể kết nối khi Server chưa chạy. WithAutomaticReconnect() chỉ hỗ trợ kết nối lại sau khi kết nối ban đầu thành công.
 
+\### Lỗi 2 – Sai đường dẫn Hub
+
+
+
+Sửa đường dẫn Hub trong Client từ `/hubs/ping` thành `/hub/ping` rồi chạy lại Client.
+
+
+
+!\[Lỗi 2](anh/buoc9-loi2.png)
+
+
+
+\*\*Kết quả:\*\* Client báo lỗi HTTP 404 (Not Found).
+
+
+
+\*\*Giải thích:\*\* Đường dẫn kết nối của Client phải trùng với đường dẫn được cấu hình trong `MapHub()` ở Server.
+
