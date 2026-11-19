@@ -50,3 +50,25 @@ Kết quả chạy server:
 
 Server chạy thành công tại http://localhost:5282.
 
+\## Bước 3: Kết nối Client với SignalR Server
+
+
+
+Đã cấu hình Ping.Client kết nối đến SignalR Hub thông qua địa chỉ http://localhost:5282/pingHub.
+
+
+
+Client gọi phương thức Echo với nội dung "Xin chao SignalR" và nhận phản hồi từ Server.
+
+
+
+Kết quả chạy thử:
+
+
+
+!\[Kết quả Echo](anh/buoc3-echo.png)
+
+
+
+Client kết nối và nhận phản hồi thành công.
+
