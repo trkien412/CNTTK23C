@@ -1,3 +1,4 @@
+
 using Ping.Api.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,8 +7,9 @@ builder.Services.AddSignalR();
 
 var app = builder.Build();
 
-app.MapGet("/", () => "SignalR Server is running!");
+app.MapGet("/", () => Results.Ok(
+    new { service = "PingApi", status = "running" }));
 
-app.MapHub<PingHub>("/pingHub");
+app.MapHub<PingHub>("/hubs/ping");
 
 app.Run();

@@ -1,45 +1,65 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿
+using Microsoft.AspNetCore.SignalR.Client;
 
-Console.WriteLine("Dang ket noi den SignalR Server...");
+var serverUrl = args.Length > 0 ? args[0].TrimEnd('/') : "http://localhost:5200";
+var name = args.Length > 1 ? args[1] : "Client";
 
-var connection = new HubConnectionBuilder()
-    .WithUrl("http://localhost:5282/pingHub")
+await using var connection = new HubConnectionBuilder()
+    .WithUrl($"{serverUrl}/hubs/ping")
     .WithAutomaticReconnect()
     .Build();
 
-connection.Reconnecting += error =>
+// Đăng ký nhận thông điệp
+
+connection.On<string>("EchoResponse", msg => Console.WriteLine($"[Echo] {msg}"));
+connection.On<string>("BroadcastMessage",
+    msg => Console.WriteLine($"[Broadcast] {msg}"));
+
+connection.On<string>("GroupMessage",
+    msg => Console.WriteLine($"[Group] {msg}"));
+
+connection.On<string>("SystemMessage",
+    msg => Console.WriteLine($"[System] {msg}"));
+
+// Theo dõi trạng thái kết nối
+connection.Reconnecting += _ =>
 {
-    Console.WriteLine("Dang ket noi lai...");
+    Console.WriteLine("[Lifecycle] Dang ket noi lai...");
     return Task.CompletedTask;
 };
 
-connection.Reconnected += connectionId =>
+connection.Reconnected += newId =>
 {
-    Console.WriteLine("Da ket noi lai");
+    Console.WriteLine($"[Lifecycle] Da ket noi lai: {newId?[..8]}");
     return Task.CompletedTask;
 };
 
-connection.Closed += error =>
+connection.Closed += _ =>
 {
-    Console.WriteLine("Da ngat ket noi!");
+    Console.WriteLine("[Lifecycle] Ket noi da dong.");
     return Task.CompletedTask;
 };
 
-connection.On<string>("EchoResponse", message =>
-{
-    Console.WriteLine($"[Echo] Echo: {message}");
-});
+// Mở kết nối
+await connection.StartAsync();
 
-try
-{
-    await connection.StartAsync();
-    Console.WriteLine("Da ket noi SignalR Server!");
+Console.WriteLine($"{name} da ket noi den PingApi. ConnectionId: {connection.ConnectionId?[..8]}");
 
-    await connection.InvokeAsync("Echo", "Xin chao SignalR");
-}
-catch (Exception ex)
-{
-    Console.WriteLine($"Loi ket noi: {ex.Message}");
-}
+// Gọi Echo
+await connection.InvokeAsync("Echo", $"Xin chao SignalR tu {name}");
 
+// Tham gia nhóm và gửi tin nhắn
+await connection.InvokeAsync("JoinGroup", "lop-hoc-01");
+
+await connection.InvokeAsync(
+    "SendToGroup",
+    "lop-hoc-01",
+    $"Thong bao nhom tu {name}");
+
+// Phát tin nhắn cho tất cả
+await connection.InvokeAsync(
+    "Broadcast",
+    $"Xin chao tat ca tu {name}");
+
+Console.WriteLine("Dang cho thong diep... Nhan Enter de thoat.");
 Console.ReadLine();
