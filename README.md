@@ -170,3 +170,25 @@ Kết quả kiểm tra:
 
 \*\*Giải thích:\*\* WithAutomaticReconnect() hỗ trợ Client tự động thử kết nối lại khi mất kết nối với Server.
 
+\## Bước 8: Thí nghiệm lỗi 1 – Máy chủ chưa chạy
+
+
+
+Tắt Server rồi chạy Client để kiểm tra lỗi kết nối.
+
+
+
+Kết quả kiểm tra:
+
+
+
+!\[Lỗi 1](anh/buoc8-loi1.png)
+
+
+
+\*\*Kết quả:\*\* Client báo lỗi Connection refused (SocketException 10061).
+
+
+
+\*\*Giải thích:\*\* StartAsync() không thể kết nối khi Server chưa chạy. WithAutomaticReconnect() chỉ hỗ trợ kết nối lại sau khi kết nối ban đầu thành công.
+
