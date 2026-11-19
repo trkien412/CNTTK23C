@@ -8,6 +8,8 @@
 
 Đã tạo solution PingSignalR gồm hai project:
 
+
+
 \- Ping.Api: ASP.NET Core Web.
 
 \- Ping.Client: Console Client sử dụng SignalR.
@@ -28,6 +30,8 @@ Kết quả build:
 
 Build succeeded, không có lỗi.
 
+
+
 \## Bước 2: Xây dựng SignalR Hub
 
 
@@ -36,7 +40,7 @@ Build succeeded, không có lỗi.
 
 
 
-Đã cấu hình AddSignalR() và MapHub<PingHub>("/pingHub").
+Đã cấu hình AddSignalR() và MapHub<PingHub>("/hubs/ping").
 
 
 
@@ -50,11 +54,13 @@ Kết quả chạy server:
 
 Server chạy thành công tại http://localhost:5282.
 
+
+
 \## Bước 3: Kết nối Client với SignalR Server
 
 
 
-Đã cấu hình Ping.Client kết nối đến SignalR Hub thông qua địa chỉ http://localhost:5282/pingHub.
+Đã cấu hình Ping.Client kết nối đến SignalR Hub thông qua địa chỉ http://localhost:5282/hubs/ping.
 
 
 
@@ -71,6 +77,8 @@ Kết quả chạy thử:
 
 
 Client kết nối và nhận phản hồi thành công.
+
+
 
 \## Bước 4: Kiểm tra tự động kết nối lại
 
@@ -93,4 +101,28 @@ Kết quả kiểm thử:
 
 
 Client hiển thị thông báo "Dang ket noi lai..." và "Da ket noi lai".
+
+
+
+\## Bước 5: Kiểm tra Negotiate
+
+
+
+Sử dụng lệnh curl để gửi yêu cầu đến endpoint negotiate của SignalR Hub.
+
+
+
+Kết quả kiểm tra:
+
+
+
+!\[Kết quả Negotiate](anh/buoc5-negotiate.png)
+
+
+
+\*\*Kết quả:\*\* Server trả về HTTP 200 OK, kèm connectionId, connectionToken và danh sách phương thức truyền tải.
+
+
+
+\*\*Giải thích:\*\* Negotiate giúp Client và Server trao đổi thông tin trước khi thiết lập kết nối SignalR.
 
